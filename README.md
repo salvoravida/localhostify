@@ -8,7 +8,7 @@
 Http reverse proxy with CORS, cookies, origin and refer override!.
 
 ```
-locahost:3000 -> CORS-cookie-origin-refer-free tunnel-server localhost:3001 <- api.production.domain.com
+locahost:3000 -> tunnel-server localhost:3001 <- api.production.domain.com
 ```
 ## ℹ️ Usage
 If you need a cookie for auth the session, copy it from the Browser and save to a file ".cookie[.env]"

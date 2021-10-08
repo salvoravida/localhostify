@@ -5,7 +5,7 @@
 </p>
 
 # 💥 cors-tunnel
-Http reverse proxy with CORS and cookie tunneling - localhost:3001 -> api.prod.domain.com.
+Http reverse proxy with CORS and cookie tunneling.
 
 ```
 locahost:3000 -> CORS-cookie-free tunnel-server localhost:3001 <- api.production.domain.com

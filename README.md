@@ -25,7 +25,7 @@ Enjoy running your local frontend `http://localhost:3000` using real backend ser
 
 ## 👏 Contributing
 
-If you are interested in contributing to `cors-tunnel`, open an issue or a pr!
+If you are interested in contributing to `dev-api-tunnel`, open an issue or a pr!
 
 ## 🎉 Thanks
 

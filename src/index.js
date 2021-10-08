@@ -6,7 +6,7 @@ const http = require("http");
 const version = require("../package.json").version;
 
 export function run() {
-  console.log("\nCORS Tunnel " + version);
+  console.log("\nDev Api Tunnel " + version);
   const { argv } =  yargs(process.argv.slice(2))
   const port = Number(argv.p || 3001);
 

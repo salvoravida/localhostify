@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/cors-tunnel"><img src="https://img.shields.io/npm/v/cors-tunnel.svg?style=flat-square"></a>
-  <a href="https://www.npmjs.com/package/cors-tunnel"><img src="https://img.shields.io/npm/dt/cors-tunnel.svg?style=flat-square"></a>
+  <a href="https://www.npmjs.com/package/cors-tunnel"><img src="https://img.shields.io/npm/dt/cors-tunnel.svg?style=flat-square"></a><br/>
   CORS Tunnel - Because real-backends matters!!
 </p>
 

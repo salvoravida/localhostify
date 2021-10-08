@@ -33,5 +33,5 @@ Thank You, Open Source!
 
 ## 📜 License
 
-`cors-tunnel` is 100% free and open-source, under [MIT](LICENSE).
+`dev-api-tunnel` is 100% free and open-source, under [MIT](LICENSE).
 

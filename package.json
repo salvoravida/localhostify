@@ -1,13 +1,25 @@
 {
   "name": "cors-tunnel",
-  "version": "0.0.1",
+  "version": "0.0.10",
   "description": "Http reverse proxy with CORS and cookie tunneling - localhost:3001 -> api.prod.domain.com",
-  "bin": "lib/bin.js",
-  "dependencies": {
-    "http-proxy": "^1.18.1"
+  "source": "src/index.js",
+  "main": "./dist/index.js",
+  "bin": {
+    "cors-tunnel": "bin/cors-tunnel.js"
+  },
+  "engines": {
+    "node": ">=10.14",
+    "npm": ">=6",
+    "yarn": ">=1"
+  },
+  "devDependencies": {
+    "http-proxy": "^1.18.1",
+    "microbundle": "^0.14.0",
+    "prettier": "2.4.1",
+    "yargs": "^17.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "microbundle -i src/index.js -o dist/index.js --no-pkg-main -f cjs --no-sourcemap --compress"
   },
   "repository": {
     "type": "git",

@@ -19,10 +19,9 @@ npx cors-tunnel -p 3001 -t https://api.prod.domain.com -c .cookie.prod
 Now your local Api server `http://localhost:3001` will forward requests to `https://api.prod.domain.com`
 adding CORS headers to the response.
 
-## 💡 Enojy dev/debug with real backend!
 Enjoy running your local frontend `http://localhost:3000` using real backend services!
 
-
+<br/><br/>
 
 ## 👏 Contributing
 

@@ -12,7 +12,7 @@ locahost:3000 -> tunnel-server localhost:3001 <- api.production.domain.com
 ## ℹ️ Usage
 If you need a cookie for auth the session, copy it from the Browser and save to a file ".cookie[.env]"
 ```
-npx cors-tunnel -p 3001 -t https://api.prod.domain.com -c .cookie.prod
+npx dev-api-tunnel -p 3001 -t https://api.prod.domain.com -c .cookie.prod
 ```
 
 Now your local Api server `http://localhost:3001` will forward requests to `https://api.prod.domain.com` overriding refer, origin, cookies and

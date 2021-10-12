@@ -14,7 +14,7 @@ locahost:3002 === https://staging.domain.com/api/* & http://localhost:3000/*
 ## ℹ️ Config
 
 `.localhostify.js`
-```
+```javascript
 module.exports = {
    prod: {
       port: 3001,

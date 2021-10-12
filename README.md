@@ -1,30 +1,62 @@
 <p align="center">
-  <a href="https://www.npmjs.com/package/dev-api-tunnel"><img src="https://img.shields.io/npm/v/dev-api-tunnel.svg?style=flat-square"></a><br/>
-  Dev Api Tunnel - Because real-backends matters!!
+  <a href="https://www.npmjs.com/package/localhostify"><img src="https://img.shields.io/npm/v/localhostify.svg?style=flat-square"></a><br/>
+  localhostify - Because real-backends matters!!
 </p>
 
-# 💥 dev-api-tunnel
-Http reverse proxy with CORS, cookies, origin and refer override!.
+# 💥 localhostify
+Http reverse proxy with Hot Reload, CORS, cookies, origin and refer override!.
 
 ```
-locahost:3000 -> tunnel-server localhost:3001 <- api.production.domain.com
-```
-## ℹ️ Usage
-If you need a cookie for auth the session, copy it from the Browser and save to a file ".cookie[.env]"
-```
-npx dev-api-tunnel -p 3001 -t https://api.prod.domain.com -c .cookie.prod
+locahost:3001 === https://prod.domain.com/api/* & http://localhost:3000/*  
+locahost:3002 === https://staging.domain.com/api/* & http://localhost:3000/*  
 ```
 
-Now your local Api server `http://localhost:3001` will forward requests to `https://api.prod.domain.com` overriding refer, origin, cookies and
-adding CORS headers to the response
+## ℹ️ Config
 
-Enjoy running your local frontend `http://localhost:3000` using real backend services!
+`.localhostify.js`
+```
+module.exports = {
+   prod: {
+      port: 3001,
+      target: {
+         host: 'https://prod.domain.com',
+         matchUrl: '^\\/api*',
+         // changeOrigin: true,  //default value
+         // autoRewrite: true,   //default value
+         // protocolRewrite: 'http',  //default value
+      },
+      local: {
+         // changeOrigin: true, //default value
+         // autoRewrite: true,  //default value
+         // host: 'http://localhost:3000' //default value
+      },
+      // allowHeaders: 'content-type', //default cors value
+   },
+   staging: {
+      port: 3002,
+      target: {
+         host: 'https://staging.domain.com',
+         matchUrl: '^\\/api*',
+      },
+   },
+};
+```
+
+## 💥 Run
+```
+your-dev-server start
+npx localhostify prod
+npx localhostify staging
+```
+
+Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local frotend mixed with real backends enviroments!<br/>
+Hot reload works concurrenly!!
 
 <br/><br/>
 
 ## 👏 Contributing
 
-If you are interested in contributing to `dev-api-tunnel`, open an issue or a pr!
+If you are interested in contributing to `localhostify`, open an issue or a pr!
 
 ## 🎉 Thanks
 
@@ -32,5 +64,5 @@ Thank You, Open Source!
 
 ## 📜 License
 
-`dev-api-tunnel` is 100% free and open-source, under [MIT](LICENSE).
+`localhostify` is 100% free and open-source, under [MIT](LICENSE).
 

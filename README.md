@@ -4,6 +4,7 @@
 </p>
 
 # 💥 localhostify
+Concurrently Hot Reload any enviroments! </br>
 HTTP reverse proxy with Hot Reload, CORS, cookies, origin, and refer override!.
 
 ```

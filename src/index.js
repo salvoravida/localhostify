@@ -104,7 +104,7 @@ server.on('upgrade', function (req, socket, head) {
 
 const port = Number(config.port || 3001);
 
-console.log('\nDev Api Tunnel ' + version);
+console.log('\nlocalhostify ' + version);
 console.log(`http://localhost:${port} -> ${config.target.host}`);
 
 server.listen(port);

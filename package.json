@@ -1,11 +1,11 @@
 {
-  "name": "dev-api-tunnel",
-  "version": "0.0.12",
-  "description": "Http reverse proxy with CORS and cookie tunneling - localhost:3001 -> api.prod.domain.com",
+  "name": "localhostify",
+  "version": "0.0.2",
+  "description": "Easy HTTP reverse proxy - localhost:3001 -> prod.domain.com",
   "source": "src/index.js",
   "main": "./dist/index.js",
   "bin": {
-    "cors-tunnel": "bin/dev-api-tunnel.js"
+    "localhostify": "bin/localhostify.js"
   },
   "engines": {
     "node": ">=10.14",
@@ -15,15 +15,14 @@
   "devDependencies": {
     "http-proxy": "^1.18.1",
     "microbundle": "^0.14.0",
-    "prettier": "2.4.1",
-    "yargs": "^17.2.1"
+    "prettier": "2.4.1"
   },
   "scripts": {
     "build": "microbundle -i src/index.js -o dist/index.js --no-pkg-main -f cjs --no-sourcemap --compress"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://salvoravida/dev-api-tunnel.git"
+    "url": "git+https://salvoravida/localhostify.git"
   },
   "keywords": [
     "cors",
@@ -32,7 +31,7 @@
   "author": "Salvatore Ravidà",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/salvoravida/dev-api-tunnel/issues"
+    "url": "https://github.com/salvoravida/localhostify/issues"
   },
-  "homepage": "https://github.com/salvoravida/dev-api-tunnel#readme"
+  "homepage": "https://github.com/salvoravida/localhostify#readme"
 }

@@ -1,70 +1,110 @@
-import * as httpProxy from "http-proxy";
-import yargs from "yargs";
-const fs = require("fs");
-const http = require("http");
+/* eslint-disable @typescript-eslint/no-var-requires */
+import httpProxy from 'http-proxy';
+const http = require('http');
+//const httpProxy = require('http-proxy');
+const version = require('../package.json').version;
 
-const version = require("../package.json").version;
+const configFile = require(process.cwd() + '/.localhostify.js');
 
-export function run() {
-  console.log("\nDev Api Tunnel " + version);
-  const { argv } =  yargs(process.argv.slice(2))
-  const port = Number(argv.p || 3001);
+const env = process.argv[2];
+if (!env || !configFile[env]) throw new Error(`Enviroment ${env} not found!`);
 
-  if (!argv.t) throw new Error('No target!');
+const config = configFile[env];
+if (!config.target || !config.target.host) throw new Error('No target!');
 
-  const target = argv.t;
-  const sessionCookie =argv.c ? fs.readFileSync(`${argv.c}`, "utf8").trim() : '';
+/*** default configs ***/
 
-  const proxy = httpProxy.createProxyServer({});
+config.allowHeaders = config.allowHeaders || 'content-type';
 
-  /* override Cookie, Origin and Refer to target */
-  proxy.on("proxyReq", (proxyReq, req) => {
-    if (sessionCookie) proxyReq.setHeader("Cookie", sessionCookie);
-    proxyReq.setHeader("origin", target);
+config.target = {
+  changeOrigin: true,
+  autoRewrite: true,
+  protocolRewrite: 'http',
+  ...config.target,
+};
 
-    const referer = req.headers.referer;
-    const origin = req.headers.origin;
-    if (referer && origin) {
-      proxyReq.setHeader("referer", referer.replace(origin, target));
+config.local = {
+  changeOrigin: true,
+  autoRewrite: true,
+  host: 'http://localhost:3000',
+  ...config.local,
+};
+
+/*** create reverse proxies  ***/
+
+const proxy = httpProxy.createProxyServer({
+  changeOrigin: config.target.changeOrigin,
+  autoRewrite: config.target.autoRewrite,
+  protocolRewrite: config.target.protocolRewrite,
+  target: config.target.host,
+});
+
+const feproxy = httpProxy.createProxyServer({
+  changeOrigin: config.local.changeOrigin,
+  autoRewrite: config.local.autoRewrite,
+  target: config.local.host,
+});
+
+/*** override Cookie, Origin and Refer to target ***/
+
+proxy.on('proxyReq', (proxyReq, req) => {
+  if (config.target.cookie) proxyReq.setHeader('Cookie', config.target.cookie);
+  proxyReq.setHeader('origin', config.target.host);
+
+  const referer = req.headers.referer;
+  const origin = req.headers.origin;
+  if (referer && origin) {
+    proxyReq.setHeader('referer', referer.replace(origin, config.target.host));
+  }
+});
+
+/*** ignore errors ***/
+
+proxy.on('error', (w) => {
+  console.log(w);
+});
+
+feproxy.on('error', (w) => {
+  console.log(w);
+});
+
+const server = http.createServer((req, res) => {
+  if (req.method !== 'OPTIONS') {
+    if (new RegExp(config.target.matchUrl).test(req.url)) {
+      console.log(req.method, config.target.host, req.url);
+      proxy.web(req, res);
+    } else {
+      console.log(req.method, config.local.host, req.url);
+      feproxy.web(req, res);
     }
-  });
-
-  /* override headers from target to request */
-  proxy.on("proxyRes", (proxyRes, req) => {
-    proxyRes.headers["Access-Control-Allow-Headers"] = "content-type";
-    proxyRes.headers["Access-Control-Allow-Methods"] =
-      "GET, PUT, POST, DELETE, HEAD";
+  } else {
+    /* set Options headers for cors fetch option*/
+    res.setHeader('Access-Control-Allow-Headers', config.allowHeaders);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, HEAD');
     const origin = req.headers.origin;
     if (origin) {
-      proxyRes.headers["Access-Control-Allow-Origin"] = origin;
-      proxyRes.headers["Access-Control-Allow-Credentials"] = "true";
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
     }
-  });
+    res.end();
+  }
+});
 
-  const server = http.createServer((req, res) => {
-    if (req.method !== "OPTIONS") {
-      console.log(req.method, req.url);
-      proxy.web(req, res, {
-        changeOrigin: true,
-        target,
-      });
-    } else {
-      /* set Options headers for cors fetch option*/
-      res.setHeader("Access-Control-Allow-Headers", "content-type");
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, PUT, POST, DELETE, HEAD"
-      );
-      const origin = req.headers.origin;
-      if (origin) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-        res.setHeader("Access-Control-Allow-Credentials", "true");
-      }
-      res.end();
-    }
-  });
+/*** hot reload ws ***/
 
-  console.log(`http://localhost:${port} -> ${target}`);
+server.on('upgrade', function (req, socket, head) {
+  if (new RegExp(config.target.matchUrl).test(req.url)) {
+    console.log('WS', config.target.host, req.url);
+    proxy.ws(req, socket, head);
+  } else {
+    console.log('WS', config.local.host, req.url);
+    feproxy.ws(req, socket, head);
+  }
+});
 
-  server.listen(port);
-}
+const port = Number(config.port || 3001);
+
+console.log('\nDev Api Tunnel ' + version);
+console.log(`http://localhost:${port} -> ${config.target.host}`);
+
+server.listen(port);

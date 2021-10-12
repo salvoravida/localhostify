@@ -51,7 +51,7 @@ npx localhostify staging
 ```
 
 Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local frotend mixed with real backends enviroments!<br/>
-Hot reload works concurrenly!!
+Hot reload works concurrently!!
 
 <br/><br/>
 

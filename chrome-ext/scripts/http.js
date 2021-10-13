@@ -1,4 +1,6 @@
-/* HTTP headers Location redirect */
+/**
+ *  https://github.com/salvoravida/localhostify
+ */
 
 const { externalRedirects } = window.__LOCALHOSTIFY__;
 

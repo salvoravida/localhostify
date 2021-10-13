@@ -31,6 +31,12 @@ module.exports = {
          // autoRewrite: true,  //default value
          // host: 'http://localhost:3000' //default value
       },
+      externalRedirects: [
+         {
+            match: '/api/auth/callback',
+            replace: ['https://prod.domain.com', 'http://localhost:3001'],
+         },
+      ],
       // allowHeaders: 'content-type', //default cors value
    },
    staging: {
@@ -44,26 +50,36 @@ module.exports = {
 ```
 
 ## 💥 Run
-```
+```shell
 your-dev-server start
 npx localhostify prod
 npx localhostify staging
 ```
+Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local frotend mixed with real backends enviroments! Hot reload works concurrently!!
 
-Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local frotend mixed with real backends enviroments!<br/>
-Hot reload works concurrently!!
 
-<br/><br/>
+## 🍭 External Redirects
+If your application use external login or SSO you will need to forward browser redirect to localhost.
+This happens on the browser side, so we need a web extension.
 
-## 👏 Contributing
+```shell
+npx localhostify --chrome-ext
+```
+This command will create a folder ".localhostify-ext" on your project. Load it on Chrome. That's all!.
+Note: if you update your .localhostify.js config, please execute again `npx localhostify --chrome-ext` to update also the ext.
+It the browser is opened, refresh all the exstensions.
+
+
+### 👏 Contributing
 
 If you are interested in contributing to `localhostify`, open an issue or a pr!
 
-## 🎉 Thanks
+### 🎉 Credits
 
-Thank You, Open Source!
+Thank You, Open Source! </br>
+Chrome Ext inspired by requestly.io
 
-## 📜 License
+### 📜 License
 
 `localhostify` is 100% free and open-source, under [MIT](LICENSE).
 

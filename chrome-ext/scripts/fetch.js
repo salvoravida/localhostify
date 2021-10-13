@@ -1,4 +1,6 @@
-/* handle custom redirects after fetch */
+/**
+ *  https://github.com/salvoravida/localhostify
+ */
 
 function interceptor() {
    const externalMatches = ['accounts.google.com'];

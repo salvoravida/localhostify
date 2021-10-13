@@ -1,0 +1,18 @@
+{
+   "name": "Localhostify",
+   "version": "0.0.1",
+   "manifest_version": 2,
+   "description": "Localhostify: External redirects interceptor",
+   "background": {
+      "scripts": ["config.js", "scripts/http.js"]
+   },
+   "content_scripts": [
+      {
+         "all_frames": true,
+         "js": ["config.js", "scripts/fetch.js"],
+         "matches": ["http://*/*", "https://*/*"],
+         "run_at": "document_start"
+      }
+   ],
+   "permissions": ["tabs", "webRequest", "webRequestBlocking", "<all_urls>"]
+}

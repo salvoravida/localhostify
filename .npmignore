@@ -5,3 +5,6 @@ node_modules/*
 src/
 .eslintignore
 .eslintrc.json
+.prettierrc
+localhostify-ext/*
+.localhostify.js

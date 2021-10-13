@@ -1,0 +1,4 @@
+__LOCALHOSTIFY__ = {
+   "externalRedirects": [
+   ]
+}

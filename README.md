@@ -52,7 +52,7 @@ module.exports = {
 </br>
 
 ## 💥 Run
-```shell
+```
 your-dev-server start
 npx localhostify prod
 npx localhostify staging
@@ -66,7 +66,7 @@ Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local froten
 If your application use external login or SSO you will need to forward browser redirect to localhost.
 This happens on the browser side, so we need a web extension.
 
-```console
+```
 npx localhostify --chrome-ext
 ```
 

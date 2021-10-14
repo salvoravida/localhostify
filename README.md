@@ -26,12 +26,12 @@ module.exports = {
          // autoRewrite: true,   //default value
          // protocolRewrite: 'http',  //default value
       },
-      local: {
+      local: {  //optional obj if all default values
          // changeOrigin: true, //default value
          // autoRewrite: true,  //default value
          // host: 'http://localhost:3000' //default value
       },
-      externalRedirects: [
+      externalRedirects: [ //optional if needed 
          {
             match: '/api/auth/callback',
             replace: ['https://prod.domain.com', 'http://localhost:3001'],

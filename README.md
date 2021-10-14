@@ -4,8 +4,8 @@
 </p>
 
 # 💥 localhostify
-Concurrently Hot Reload any enviroments! </br>
-HTTP reverse proxy with Hot Reload, CORS, cookies, origin, and refer override!.
+Concurrently Hot Reload any environments! </br>
+HTTP reverse proxy with Hot Reload, CORS, cookies, origin, referer and location redirect override!
 
 ```
 locahost:3001 === https://prod.domain.com/api/* & http://localhost:3000/*  

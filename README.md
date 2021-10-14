@@ -49,6 +49,8 @@ module.exports = {
 };
 ```
 
+</br>
+
 ## 💥 Run
 ```shell
 your-dev-server start
@@ -56,6 +58,8 @@ npx localhostify prod
 npx localhostify staging
 ```
 Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local frotend mixed with real backends enviroments! Hot reload works concurrently!!
+
+</br>
 
 
 ## 🍭 External Redirects
@@ -65,10 +69,13 @@ This happens on the browser side, so we need a web extension.
 ```shell
 npx localhostify --chrome-ext
 ```
-This command will create a folder "localhostify-ext" on your project. Load it on Chrome. That's all!.
+
+This command will create a folder "localhostify-ext" on your project. Load it on Chrome Extensions Tab (Enable Dev Mode to see the LOAD button). That's all!.
+
 Note: if you update your .localhostify.js config, please execute again `npx localhostify --chrome-ext` to update also the ext.
 It the browser is opened, refresh all the exstensions.
 </br></br>
+
 ---
 ### 👏 Contributing
 

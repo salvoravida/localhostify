@@ -1,13 +1,13 @@
-<p align="center">
+<h3 align="center">
   <a href="https://www.npmjs.com/package/localhostify"><img src="https://img.shields.io/npm/v/localhostify.svg?style=flat-square"></a><br/>
-  localhostify - Because real-backends matters!!
-</p>
+  Because real-backends matters!!
+</h3>
 
 # 💥 localhostify
 Concurrently Hot Reload any environments! </br>
 HTTP reverse proxy with Hot Reload, CORS, cookies, origin, referer and external redirect override!
 
-```
+```properties
 locahost:3001 === https://prod.domain.com/api/* & http://localhost:3000/*  
 locahost:3002 === https://staging.domain.com/api/* & http://localhost:3000/*  
 ```
@@ -15,7 +15,7 @@ locahost:3002 === https://staging.domain.com/api/* & http://localhost:3000/*
 ## ℹ️ Config
 
 `.localhostify.js`
-```javascript
+```js
 module.exports = {
    prod: {
       port: 3001,
@@ -66,7 +66,7 @@ Browse `http://localhost:3001` and `http://localhost:3002` to enjoy local froten
 If your application use external login or SSO you will need to forward browser redirect to localhost.
 This happens on the browser side, so we need a web extension.
 
-```shell
+```console
 npx localhostify --chrome-ext
 ```
 

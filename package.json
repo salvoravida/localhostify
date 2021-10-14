@@ -1,6 +1,6 @@
 {
   "name": "localhostify",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Easy HTTP reverse proxy - localhost:3001 -> prod.domain.com",
   "source": "src/index.js",
   "main": "./dist/index.js",
@@ -18,7 +18,8 @@
     "prettier": "2.4.1"
   },
   "scripts": {
-    "build": "microbundle -i src/index.js -o dist/index.js --no-pkg-main -f cjs --no-sourcemap --compress"
+    "build": "microbundle -i src/index.js -o dist/index.js --no-pkg-main -f cjs --no-sourcemap --compress",
+    "chrome-ext": "node ./bin/createConfig.js --chrome-ext"
   },
   "repository": {
     "type": "git",

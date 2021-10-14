@@ -1,13 +1,10 @@
 {
    "name": "Localhostify",
-   "version": "0.0.9",
+   "version": "0.1.0",
    "manifest_version": 2,
    "description": "Localhostify: External redirects interceptor",
    "author": "Salvatore Ravidà",
    "homepage_url": "https://github.com/salvoravida/localhostify",
-   "icons": {
-      "128": "icon_128.png"
-   },
    "background": {
       "scripts": ["config.js", "scripts/http.js"]
    },
@@ -19,5 +16,11 @@
          "run_at": "document_start"
       }
    ],
-   "permissions": ["tabs", "webRequest", "webRequestBlocking", "<all_urls>"]
+   "icons": {
+      "128": "assets/green.png"
+   },
+   "browser_action": {
+      "name": "Toggle Localhostify!"
+   },
+   "permissions": ["storage", "tabs", "webRequest", "webRequestBlocking", "<all_urls>"]
 }

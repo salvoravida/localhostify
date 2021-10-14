@@ -16,7 +16,7 @@ function interceptor() {
                get: function () {
                   let replacedResponse = response;
 
-                 externalRedirects.forEach((rule) => {
+                  externalRedirects.forEach((rule) => {
                      if (new RegExp(rule.match).test(replacedResponse)) {
                         replacedResponse = replacedResponse.replace(rule.replace[0], rule.replace[1]);
                      }
@@ -65,13 +65,17 @@ function interceptor() {
    };
 }
 
-const interceptorScript = interceptor.toString();
-const config = 'window.__LOCALHOSTIFY__=' + JSON.stringify(window.__LOCALHOSTIFY__, 0, 2) + ';';
+chrome.storage.sync.get(['active'], function (data) {
+   if (data.active) {
+      const interceptorScript = interceptor.toString();
+      const config = 'window.__LOCALHOSTIFY__=' + JSON.stringify(window.__LOCALHOSTIFY__, 0, 2) + ';';
 
-const script = document.createElement('script');
-script.className = 'localhostify';
-script.type = 'text/javascript';
-script.appendChild(document.createTextNode(`${config} (${interceptorScript})()`));
+      const script = document.createElement('script');
+      script.className = 'localhostify';
+      script.type = 'text/javascript';
+      script.appendChild(document.createTextNode(`${config} (${interceptorScript})()`));
 
-const parent = document.head || document.documentElement;
-parent.appendChild(script);
+      const parent = document.head || document.documentElement;
+      parent.appendChild(script);
+   }
+});

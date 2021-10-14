@@ -4,8 +4,33 @@
 
 const { externalRedirects } = window.__LOCALHOSTIFY__;
 
+let localhostifyEnabled = true;
+
+chrome.runtime.onInstalled.addListener(function () {
+   chrome.storage.sync.set({ active: localhostifyEnabled }, function () {
+      console.log('Active :', localhostifyEnabled);
+   });
+});
+
+function onIconClick(toggle) {
+   chrome.storage.sync.get(['active'], function (data) {
+      const active = toggle ? !data.active : data.active;
+      localhostifyEnabled = active;
+      chrome.browserAction.setIcon({ path: active ? 'assets/green.png' : 'assets/red.png' });
+      chrome.storage.sync.set({ active }, function () {
+         console.log('Active 1:', active);
+      });
+   });
+}
+
+chrome.browserAction.onClicked.addListener(() => onIconClick(true));
+
+onIconClick();
+
+//http intercept
 chrome.webRequest.onHeadersReceived.addListener(
    function (details) {
+      if (!localhostifyEnabled) return;
       const headers = details.responseHeaders;
 
       for (var i = 0, l = headers.length; i < l; ++i) {

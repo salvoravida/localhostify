@@ -74,6 +74,11 @@ This command will create a folder "localhostify-ext" on your project. Load it on
 
 Note: if you update your .localhostify.js config, please execute again `npx localhostify --chrome-ext` to update also the ext.
 It the browser is opened, refresh all the exstensions.
+
+Disable the ext if you are on `prod.domain.com`, otherwise it will redirect to locahost!</br>
+<img width="159" alt="on" src="https://user-images.githubusercontent.com/20126259/137299423-ece3b5fc-d959-4a22-b325-ecd11ccd4487.png">
+<img width="162" alt="off" src="https://user-images.githubusercontent.com/20126259/137299440-92e3f789-54e3-460b-847f-bef52ccdf468.png">
+
 </br></br>
 
 ---

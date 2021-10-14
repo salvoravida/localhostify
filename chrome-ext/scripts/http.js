@@ -6,19 +6,14 @@ const { externalRedirects } = window.__LOCALHOSTIFY__;
 
 let localhostifyEnabled = true;
 
-chrome.runtime.onInstalled.addListener(function () {
-   chrome.storage.sync.set({ active: localhostifyEnabled }, function () {
-      console.log('Active :', localhostifyEnabled);
-   });
-});
-
 function onIconClick(toggle) {
    chrome.storage.sync.get(['active'], function (data) {
-      const active = toggle ? !data.active : data.active;
+      console.log('StorageGet Active :', JSON.stringify(data));
+      const active = toggle ? !data.active : data.active === undefined ? localhostifyEnabled : data.active;
       localhostifyEnabled = active;
       chrome.browserAction.setIcon({ path: active ? 'assets/green.png' : 'assets/red.png' });
       chrome.storage.sync.set({ active }, function () {
-         console.log('Active 1:', active);
+         console.log('StorageSet Active set:', active);
       });
    });
 }
@@ -52,5 +47,5 @@ chrome.webRequest.onHeadersReceived.addListener(
       return { responseHeaders: headers };
    },
    { urls: ['<all_urls>'] },
-   ['responseHeaders', 'blocking'],
+   ['blocking', 'responseHeaders', chrome.webRequest.OnHeadersReceivedOptions.EXTRA_HEADERS].filter(Boolean),
 );

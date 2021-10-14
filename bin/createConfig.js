@@ -1,4 +1,5 @@
 const fs = require('fs');
+const version = require('../package.json').version;
 
 const config = require(process.cwd() + '/.localhostify.js');
 const externalRedirects = Object.values(config).reduce((all, v) => [...all, ...v.externalRedirects], []);
@@ -23,4 +24,4 @@ fs.copyFileSync(__dirname + '/../chrome-ext/scripts/fetch.js', process.cwd() + '
 fs.copyFileSync(__dirname + '/../chrome-ext/assets/green.png', process.cwd() + '/localhostify-ext/assets/green.png');
 fs.copyFileSync(__dirname + '/../chrome-ext/assets/red.png', process.cwd() + '/localhostify-ext/assets/red.png');
 
-console.log("Localhostify: Chrome Ext created in localhostify-ext folder.");
+console.log(`Localhostify ${version}: Chrome Ext created in localhostify-ext folder.`);

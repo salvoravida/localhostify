@@ -65,11 +65,11 @@ This happens on the browser side, so we need a web extension.
 ```shell
 npx localhostify --chrome-ext
 ```
-This command will create a folder ".localhostify-ext" on your project. Load it on Chrome. That's all!.
+This command will create a folder "localhostify-ext" on your project. Load it on Chrome. That's all!.
 Note: if you update your .localhostify.js config, please execute again `npx localhostify --chrome-ext` to update also the ext.
 It the browser is opened, refresh all the exstensions.
-
-
+</br></br>
+---
 ### 👏 Contributing
 
 If you are interested in contributing to `localhostify`, open an issue or a pr!

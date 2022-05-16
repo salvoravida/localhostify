@@ -45,6 +45,24 @@ const feproxy = httpProxy.createProxyServer({
   target: config.local.host,
 });
 
+/*** handle external redirects on http header location ***/
+
+const externalRedirects = Array.isArray(config.externalRedirects) ? config.externalRedirects : [];
+
+proxy.on('proxyRes', (proxyRes) => {
+  if (proxyRes.headers['location']) {
+    let replacedLocation = proxyRes.headers['location'];
+
+    externalRedirects.forEach((rule) => {
+      if (new RegExp(rule.match).test(replacedLocation)) {
+        replacedLocation = replacedLocation.replace(rule.replace[0], rule.replace[1]);
+      }
+    });
+
+    proxyRes.headers['location'] = replacedLocation;
+  }
+});
+
 /*** override Cookie, Origin and Refer to target ***/
 
 proxy.on('proxyReq', (proxyReq, req) => {

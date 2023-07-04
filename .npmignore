@@ -7,4 +7,4 @@ src/
 .eslintrc.json
 .prettierrc
 localhostify-ext/*
-.localhostify.js
+.localhostify.*

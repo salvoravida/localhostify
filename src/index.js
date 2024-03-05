@@ -68,17 +68,17 @@ const feproxy = httpProxy.createProxyServer({
 const externalRedirects = Array.isArray(config.externalRedirects) ? config.externalRedirects : [];
 
 proxy.on('proxyRes', (proxyRes) => {
-   if (proxyRes.headers['location']) {
-      let replacedLocation = proxyRes.headers['location'];
-
-      externalRedirects.forEach((rule) => {
-         if (new RegExp(rule.match).test(replacedLocation)) {
-            replacedLocation = replacedLocation.replace(rule.replace[0], rule.replace[1]);
-         }
-      });
-
-      proxyRes.headers['location'] = replacedLocation;
-   }
+   proxyRes.rawHeaders.forEach((header, i) => {
+        if (header.toLowerCase() === 'location' || header.toLowerCase() === 'set-cookie') {
+             let replaced = proxyRes.rawHeaders[i + 1];
+             externalRedirects.forEach((rule) => {
+                if (new RegExp(rule.match).test(replaced)) {
+                   replaced = replaced.replace(rule.replace[0], rule.replace[1]);
+                }
+             });
+             proxyRes.rawHeaders[i + 1] = replaced;
+        }
+   });
 });
 
 proxyExtra?.on('proxyRes', (proxyRes) => {

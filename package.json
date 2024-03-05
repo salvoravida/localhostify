@@ -1,6 +1,6 @@
 {
   "name": "localhostify",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "Easy HTTP reverse proxy - localhost:3001 -> prod.domain.com",
   "source": "src/index.js",
   "main": "./dist/index.js",
